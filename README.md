@@ -10,7 +10,7 @@
 <h1>FEATURES</h1>
 
 <ul>
-<li>Automatic brightness adjustment : Street light will adjust their brightness when detect any motion or detect rain drop.</li>
-<li>Rain detection : Street light will light on full brightness when detect rain drop.</li>
-<li>Motion detection : Street light will light on full brightness when detect any motion.</li>
+<li><b>Automatic brightness adjustment :</b> Street light will adjust their brightness when detect any motion or detect rain drop.</li>
+<li><b>Rain detection :</b> Street light will light on full brightness when detect rain drop.</li>
+<li><b>Motion detection :</b> Street light will light on full brightness when detect any motion.</li>
 </ul>
