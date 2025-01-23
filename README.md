@@ -7,7 +7,7 @@ NORHAZIRA BINTI ABD RAHMAN         (160923)
 
 RABIATUL ADAWIYAH BINTI NORDIN     (160079)
 
-FEATURES
+<h1>FEATURES</h1>
 
 Automatic brightness adjustment : Street light will adjust their brightness when detect any motion or detect rain drop.
 Rain detection : Street light will light on full brightness when detect rain drop.
