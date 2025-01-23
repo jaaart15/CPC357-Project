@@ -1,0 +1,246 @@
+{
+	"subfolders": [],
+	"objects": [
+		{
+			"id": "4a89a32f-9cf8-4b6e-8f6d-6094f0e961a3",
+			"name": "message_jia",
+			"objects": [],
+			"subfolders": [],
+			"plans": {
+				"id": "4a89a32f-9cf8-4b6e-8f6d-6094f0e961a3",
+				"name": "message_jia",
+				"graph": {
+					"externals": {
+						"Advanced/External#1": {
+							"i1": {
+								"y": 8,
+								"name": "i1",
+								"index": null,
+								"label": "i1",
+								"default": null
+							},
+							"id": "Advanced/External#1",
+							"o1": {
+								"y": 8,
+								"name": "o1",
+								"index": null,
+								"label": "o1",
+								"default": null
+							},
+							"metadata": {
+								"inports": [
+									{
+										"y": 8,
+										"name": "i1",
+										"index": null,
+										"label": "i1",
+										"default": null
+									}
+								],
+								"outports": [
+									{
+										"y": 8,
+										"name": "o1",
+										"index": null,
+										"label": "o1",
+										"default": null
+									}
+								]
+							},
+							"component": "Advanced/External"
+						}
+					},
+					"processes": {
+						"Advanced/Python#1": {
+							"id": "Advanced/Python#1",
+							"metadata": {
+								"x": -300,
+								"y": -175,
+								"inports": {
+									"parameter": [
+										{
+											"index": 1,
+											"label": "parameter[1]"
+										}
+									]
+								},
+								"outports": {
+									"output": [
+										{
+											"index": 1,
+											"label": "output[1]"
+										},
+										{
+											"index": 2,
+											"label": "output[2]"
+										},
+										{
+											"index": 3,
+											"label": "output[3]"
+										}
+									]
+								}
+							},
+							"component": "Advanced/Python"
+						},
+						"Data Query/Data Source#1": {
+							"id": "Data Query/Data Source#1",
+							"metadata": {
+								"x": -575,
+								"y": -75
+							},
+							"component": "Data Query/Data Source"
+						},
+						"Communication/Send Email#1": {
+							"id": "Communication/Send Email#1",
+							"metadata": {
+								"x": 25,
+								"y": -50
+							},
+							"component": "Communication/Send Email"
+						}
+					},
+					"connections": [
+						{
+							"tgt": {
+								"port": "datasource",
+								"process": "Data Query/Data Source#1"
+							},
+							"data": [
+								{
+									"id": "ca8cefee-9035-41db-b5de-306f296fb6e1",
+									"name": "Rain sensor",
+									"config": {
+										"driver": "iot",
+										"driverName": "AIoT Device",
+										"driverType": "data_blending"
+									}
+								}
+							],
+							"metadata": {
+								"label": "Rain sensor"
+							}
+						},
+						{
+							"tgt": {
+								"port": "python",
+								"process": "Advanced/Python#1"
+							},
+							"data": "import json\nsensor_data = parameter[1]\nmax_index = len(parameter[1])\nlatest_data = sensor_data[max_index-1]\nlatest_sensor_data = latest_data[\"Raining\"] # replace [“Soil moisture”] with your sensor name\nthreshold = 3000 #replace with your average value\nif int(latest_sensor_data) < threshold:\n    msgbody='<p>The current rain value '+latest_sensor_data+' is below threshold, the reading is less than '+str(threshold)+'.</p><br>'\n    output[1] = \"Rain Detected!\"\n    output[2]=msgbody\n    output[3]=1\nelse:\n    output[1] = \"\"\n    output[2] = \"\"\n    output[3] = \"\"",
+							"metadata": {
+								"label": "</code>"
+							}
+						},
+						{
+							"tgt": {
+								"port": "to",
+								"process": "Communication/Send Email#1"
+							},
+							"data": {
+								"to": [
+									"nrhazira15@gmail.com"
+								],
+								"roles": [],
+								"users": []
+							},
+							"metadata": {
+								"label": "1 recipient"
+							}
+						},
+						{
+							"src": {
+								"port": "output",
+								"index": 1,
+								"process": "Advanced/Python#1",
+								"external": false
+							},
+							"tgt": {
+								"port": "subject",
+								"index": null,
+								"process": "Communication/Send Email#1",
+								"external": false
+							}
+						},
+						{
+							"src": {
+								"port": "output",
+								"index": 2,
+								"process": "Advanced/Python#1",
+								"external": false
+							},
+							"tgt": {
+								"port": "template",
+								"index": null,
+								"process": "Communication/Send Email#1",
+								"external": false
+							}
+						},
+						{
+							"src": {
+								"port": "output",
+								"index": 3,
+								"process": "Advanced/Python#1",
+								"external": false
+							},
+							"tgt": {
+								"port": "data",
+								"index": null,
+								"process": "Communication/Send Email#1",
+								"external": false
+							}
+						},
+						{
+							"src": {
+								"port": "data",
+								"index": null,
+								"process": "Data Query/Data Source#1",
+								"external": false
+							},
+							"tgt": {
+								"port": "parameter",
+								"index": 1,
+								"process": "Advanced/Python#1",
+								"external": false
+							}
+						}
+					]
+				},
+				"py_plan": true,
+				"version": 7,
+				"configs": [
+					{
+						"id": 4088,
+						"name": "Default",
+						"config": {
+							"environment": [
+								{
+									"name": "i1",
+									"label": "i1",
+									"value": ""
+								}
+							],
+							"deployOption": {
+								"cron": {
+									"tz": "Asia/Kuala_Lumpur"
+								},
+								"name": "Interval",
+								"value": "2"
+							}
+						},
+						"enabled": true,
+						"plan_id": "4a89a32f-9cf8-4b6e-8f6d-6094f0e961a3"
+					}
+				],
+				"stats": {
+					"all": [
+						4088
+					],
+					"scheduled": [],
+					"running": []
+				}
+			}
+		}
+	],
+	"object": "Plan",
+	"version": "1"
+}

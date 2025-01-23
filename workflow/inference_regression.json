@@ -1,0 +1,407 @@
+{
+	"subfolders": [],
+	"objects": [
+		{
+			"id": "947598ac-99f9-4963-8fc5-09b93cb0aedf",
+			"name": "inference_reg",
+			"objects": [],
+			"subfolders": [],
+			"plans": {
+				"id": "947598ac-99f9-4963-8fc5-09b93cb0aedf",
+				"name": "inference_reg",
+				"graph": {
+					"externals": {
+						"Advanced/External#1": {
+							"i1": {
+								"y": 8,
+								"name": "i1",
+								"index": null,
+								"label": "i1",
+								"default": null
+							},
+							"id": "Advanced/External#1",
+							"o1": {
+								"y": 8,
+								"name": "o1",
+								"index": null,
+								"label": "o1",
+								"default": null
+							},
+							"metadata": {
+								"inports": [
+									{
+										"y": 8,
+										"name": "i1",
+										"index": null,
+										"label": "i1",
+										"default": null
+									}
+								],
+								"outports": [
+									{
+										"y": 8,
+										"name": "o1",
+										"index": null,
+										"label": "o1",
+										"default": null
+									}
+								]
+							},
+							"component": "Advanced/External"
+						}
+					},
+					"processes": {
+						"Pre-trained/Inference#1": {
+							"id": "Pre-trained/Inference#1",
+							"metadata": {
+								"x": 975,
+								"y": 100,
+								"label": "Inference"
+							},
+							"component": "Pre-trained/Inference"
+						},
+						"Data Query/Data Source#1": {
+							"id": "Data Query/Data Source#1",
+							"metadata": {
+								"x": 175,
+								"y": 250,
+								"label": "Datasource"
+							},
+							"component": "Data Query/Data Source"
+						},
+						"Preprocessing/Change Type#1": {
+							"id": "Preprocessing/Change Type#1",
+							"metadata": {
+								"x": 750,
+								"y": 250,
+								"label": "Change types"
+							},
+							"component": "Preprocessing/Change Type"
+						},
+						"Pre-trained/Retrieve Model#1": {
+							"id": "Pre-trained/Retrieve Model#1",
+							"metadata": {
+								"x": 575,
+								"y": 25,
+								"label": "Retrieve Model"
+							},
+							"component": "Pre-trained/Retrieve Model"
+						},
+						"Visualizer/Data Visualizer#1": {
+							"id": "Visualizer/Data Visualizer#1",
+							"metadata": {
+								"x": 1300,
+								"y": 150,
+								"label": "Predictions"
+							},
+							"component": "Visualizer/Data Visualizer"
+						},
+						"Preprocessing/Replace Missing#1": {
+							"id": "Preprocessing/Replace Missing#1",
+							"metadata": {
+								"x": 450,
+								"y": 250,
+								"label": "Replace Missing"
+							},
+							"component": "Preprocessing/Replace Missing"
+						}
+					},
+					"connections": [
+						{
+							"tgt": {
+								"port": "options",
+								"process": "Preprocessing/Replace Missing#1"
+							},
+							"data": {
+								"auto": [
+									{
+										"to": "4",
+										"drop": false,
+										"from": "Numeric Features (Float, Integer)",
+										"type": 0,
+										"fillValue": 0
+									},
+									{
+										"to": "4",
+										"drop": false,
+										"from": "Categorical Features (String, Object, Boolean)",
+										"type": 1,
+										"fillValue": "Unkown"
+									}
+								],
+								"mode": "auto",
+								"advance": [
+									{
+										"to": "1",
+										"drop": false,
+										"name": "insertion_timestamp",
+										"type": "1",
+										"fillValue": 0
+									},
+									{
+										"to": "1",
+										"drop": false,
+										"name": "device_id",
+										"type": "1",
+										"fillValue": 0
+									},
+									{
+										"to": "0",
+										"drop": false,
+										"name": "Raining",
+										"type": "0",
+										"fillValue": 0
+									},
+									{
+										"to": "1",
+										"drop": false,
+										"name": "device_name",
+										"type": "1",
+										"fillValue": 0
+									}
+								],
+								"dataSourceID": "Data Query/Data Source#1",
+								"tabSelectedIndex": 0
+							},
+							"metadata": {
+								"label": "[auto]"
+							}
+						},
+						{
+							"tgt": {
+								"port": "options",
+								"process": "Preprocessing/Change Type#1"
+							},
+							"data": {
+								"auto": [
+									{
+										"to": "1",
+										"from": "String",
+										"type": 1
+									},
+									{
+										"to": "1",
+										"from": "Boolean",
+										"type": 1
+									},
+									{
+										"to": "2",
+										"from": "Integer",
+										"type": 0
+									},
+									{
+										"to": "3",
+										"from": "Float",
+										"type": 0
+									},
+									{
+										"to": "4",
+										"from": "Date",
+										"type": 3
+									},
+									{
+										"to": "5",
+										"from": "Datetime",
+										"type": 3
+									}
+								],
+								"mode": "auto",
+								"advance": [
+									{
+										"to": "1",
+										"from": "String",
+										"name": "insertion_timestamp"
+									},
+									{
+										"to": "1",
+										"from": "String",
+										"name": "device_id"
+									},
+									{
+										"to": "2",
+										"from": "Integer",
+										"name": "Raining"
+									},
+									{
+										"to": "1",
+										"from": "String",
+										"name": "device_name"
+									}
+								],
+								"dataSourceID": "Data Query/Data Source#1",
+								"tabSelectedIndex": 0
+							},
+							"metadata": {
+								"label": "[auto]"
+							}
+						},
+						{
+							"tgt": {
+								"port": "datasource",
+								"process": "Data Query/Data Source#1"
+							},
+							"data": [
+								{
+									"id": "ca8cefee-9035-41db-b5de-306f296fb6e1",
+									"name": "Rain sensor",
+									"config": {
+										"driver": "iot",
+										"driverName": "AIoT Device",
+										"driverType": "data_blending"
+									}
+								}
+							],
+							"metadata": {
+								"label": "Rain sensor"
+							}
+						},
+						{
+							"tgt": {
+								"port": "option(s)",
+								"process": "Pre-trained/Retrieve Model#1"
+							},
+							"data": {
+								"selectedModel": {
+									"name": "Modeling_Regression_1_main",
+									"path": "c7c5cbd0-cde4-449d-b08d-99bbb49edd8b/models/4090/Modeling_Regression_1_main.vone"
+								},
+								"selectedPlanID": "c7c5cbd0-cde4-449d-b08d-99bbb49edd8b",
+								"loadedModelOptions": [
+									{
+										"checked": true,
+										"Accuracy": 4.765,
+										"algorithm_id": 1,
+										"algorithm_name": "Random Forest"
+									},
+									{
+										"checked": false,
+										"Accuracy": 121.805,
+										"algorithm_id": 2,
+										"algorithm_name": "Support Vector Machine"
+									},
+									{
+										"checked": false,
+										"Accuracy": 84876486846140.44,
+										"algorithm_id": 3,
+										"algorithm_name": "Stochastic Gradient Descent"
+									},
+									{
+										"checked": false,
+										"Accuracy": 10.102,
+										"algorithm_id": 4,
+										"algorithm_name": "K-Nearest Neighbours"
+									},
+									{
+										"checked": false,
+										"Accuracy": 119.221,
+										"algorithm_id": 5,
+										"algorithm_name": "Deep Learning"
+									}
+								]
+							},
+							"metadata": {
+								"label": "[Model]"
+							}
+						},
+						{
+							"src": {
+								"port": "model(s)",
+								"index": null,
+								"process": "Pre-trained/Retrieve Model#1",
+								"external": false
+							},
+							"tgt": {
+								"port": "model(s)",
+								"index": null,
+								"process": "Pre-trained/Inference#1",
+								"external": false
+							}
+						},
+						{
+							"src": {
+								"port": "predictions",
+								"index": null,
+								"process": "Pre-trained/Inference#1",
+								"external": false
+							},
+							"tgt": {
+								"port": "data/predictions",
+								"index": null,
+								"process": "Visualizer/Data Visualizer#1",
+								"external": false
+							}
+						},
+						{
+							"src": {
+								"port": "data",
+								"index": null,
+								"process": "Data Query/Data Source#1",
+								"external": false
+							},
+							"tgt": {
+								"port": "data",
+								"index": null,
+								"process": "Preprocessing/Replace Missing#1",
+								"external": false
+							}
+						},
+						{
+							"src": {
+								"port": "data",
+								"index": null,
+								"process": "Preprocessing/Replace Missing#1",
+								"external": false
+							},
+							"tgt": {
+								"port": "data",
+								"index": null,
+								"process": "Preprocessing/Change Type#1",
+								"external": false
+							}
+						},
+						{
+							"src": {
+								"port": "data",
+								"index": null,
+								"process": "Preprocessing/Change Type#1",
+								"external": false
+							},
+							"tgt": {
+								"port": "data",
+								"index": null,
+								"process": "Pre-trained/Inference#1",
+								"external": false
+							}
+						}
+					]
+				},
+				"py_plan": true,
+				"version": 9,
+				"configs": [
+					{
+						"id": 4091,
+						"name": "Default",
+						"config": {
+							"environment": [],
+							"deployOption": {
+								"name": "Immediately Once",
+								"value": "1"
+							}
+						},
+						"enabled": true,
+						"plan_id": "947598ac-99f9-4963-8fc5-09b93cb0aedf"
+					}
+				],
+				"stats": {
+					"all": [
+						4091
+					],
+					"scheduled": [],
+					"running": []
+				}
+			}
+		}
+	],
+	"object": "Plan",
+	"version": "1"
+}
